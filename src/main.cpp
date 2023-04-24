@@ -1,67 +1,16 @@
-#include "cameras/perspective_camera.hpp"
+
 #include "defines.hpp"
-#include "renderer.hpp"
+#include "img_generator.hpp"
 
-namespace RT_ISICG
-{
-	int main( int argc, char ** argv )
-	{
-		const int imgWidth	= 600;
-		const int imgHeight = 400;
-
-		// Create a texture to render the scene.
-		Texture img = Texture( imgWidth, imgHeight );
-
-		// Create and init scene.
-		/*Scene scene;
-		scene.init();
-
-		// Create a perspective camera.
-		//PerspectiveCamera camera( float( imgWidth ) / imgHeight );
-		// TP1 à 3:
-		//Vec3f posCamera = Vec3f(0, 2, -7); Vec3f dirCamera = Vec3f(0, 0, 79);
-
-		//Vec3f posCamera = Vec3f(1, 0, 0); Vec3f dirCamera = Vec3f(1, 0, 1);
-		//Vec3f posCamera = Vec3f(0, 1, 0); Vec3f dirCamera = Vec3f(0, 1, 1);
-		//Vec3f posCamera = Vec3f(4, -1, 0); Vec3f dirCamera = Vec3f(-1, -1, 2);
-		// TP4:
-		//Vec3f posCamera = Vec3f(0, 2, -7); Vec3f dirCamera = Vec3f(0, 0, 79);
-		Vec3f posCamera = Vec3f(-250.f, 500.f, 330.f); Vec3f dirCamera = Vec3f(0.f, 350.f, 100.f);
-		PerspectiveCamera camera(posCamera, dirCamera, Vec3f(0, 1, 0), 60.f, float(imgWidth) / imgHeight);
-		*/
-
-		//////////////// TP 5
-		Scene scene;
-		scene.init5();
-		Vec3f posCamera = Vec3f(0.f, 0.f, 0.f); Vec3f dirCamera = Vec3f(0.f, 0.f, 1.f);
-		PerspectiveCamera camera(posCamera, dirCamera, Vec3f(0.f, 1.f, 0.f), 60.f, float(imgWidth) / imgHeight);
-		
-		// Create and setup the renderer.
-		Renderer renderer;
-		renderer.setIntegrator( IntegratorType::DIRECT_LIGHTING );
-		renderer.setBackgroundColor( GREY );
-		
-		// Launch rendering.
-		std::cout << "Rendering..." << std::endl;
-		std::cout << "- Image size: " << imgWidth << "x" << imgHeight << std::endl;
-
-		float renderingTime = renderer.renderImage( scene, &camera, img );
-
-		std::cout << "-> Done in " << renderingTime << "ms" << std::endl;
-
-		// Save rendered image.
-		const std::string imgName = "image.jpg";
-		img.saveJPG( RESULTS_PATH + imgName );
-
-		return EXIT_SUCCESS;
-	}
-} // namespace RT_ISICG
 
 int main( int argc, char ** argv )
 {
 	try
 	{
-		return RT_ISICG::main( argc, argv );
+		RT_ISICG::ImgGenerator gen(600, 400);
+		gen.setup(RT_ISICG::ImgGenerator::TP6);
+		gen.generate("image.jpg");
+		return EXIT_SUCCESS;
 	}
 	catch ( const std::exception & e )
 	{

@@ -15,7 +15,6 @@ namespace RT_ISICG
 			p_hitRecord.faceNormal( p_ray.getDirection() );
 			p_hitRecord._distance = t1;
 			p_hitRecord._object	  = this;
-
 			return true;
 		}
 		return false;

@@ -1,6 +1,7 @@
 #include "renderer.hpp"
 #include "integrators/ray_cast_integrator.hpp"
 #include "integrators/direct_lighting_integrator.hpp"
+#include "integrators/whitted_integrator.hpp"
 #include "utils/console_progress_bar.hpp"
 #include "utils/random.hpp"
 
@@ -16,7 +17,12 @@ namespace RT_ISICG
 		{
 			case IntegratorType::DIRECT_LIGHTING:
 			{
-				_integrator = new DirectLightingIntegrator(_nLightSample);
+				_integrator = new DirectLightingIntegrator(_nbLightSamples);
+				break;
+			}
+			case IntegratorType::WHITTED: 
+			{
+				_integrator = new WhittedIntegrator(_nbLightSamples);
 				break;
 			}
 			case IntegratorType::RAY_CAST:
@@ -37,9 +43,9 @@ namespace RT_ISICG
 		}
 	}
 
-	float Renderer::getOffset() {
+	inline float Renderer::_getOffset() const {
 		// Retourne un nombre entre 0 et 1 lorsqu'il y a plus d'un rayon
-		// Sinon retourne 0.5
+		// Sinon retourne 0.5, pour tirer au milieu du pixel
 		return _nbPixelSamples == 1 ? 0.5f : randomFloat();
 	}
 
@@ -59,22 +65,13 @@ namespace RT_ISICG
 		{
 			for ( int i = 0; i < width; i++ )
 			{
-				//float x = (float)i / (float)width;
-				//float y = (float)j / (float)height;
-				/*p_texture.setPixel(i, j, Vec3f(
-					x, // R
-					y, // V
-					0.f // B
-				));
-					Ray ray = p_camera->generateRay(x, y);
-				*/ 
 				//p_texture.setPixel(i, j, (ray.getDirection() + 1.f) * 0.5f );
-				Vec3f sumRGB = Vec3f(0.f);
+				Vec3f sumRGB = Vec3f(0.f); // somme des echantillons de couleurs du pixel
 				for (int k = 0; k < _nbPixelSamples; k++) {
-					float x = (float(i) + getOffset()) / (float)width; // On ajoute 0.5 pour tirer au milieu du pixel, et on retire 0.5 pour le random float
-					float y = (float(j) + getOffset()) / (float)height; 
+					float x = (float(i) + _getOffset()) / (float)width; // On ajoute 0.5 pour tirer au milieu du pixel, et on retire 0.5 pour le random float
+					float y = (float(j) + _getOffset()) / (float)height; 
 					Ray ray = p_camera->generateRay(x, y);
-					sumRGB += glm::clamp(_integrator->Li(p_scene, ray, 0, 100), Vec3f(0.f), Vec3f(1.f));
+					sumRGB += glm::clamp(_integrator->Li(p_scene, ray, 0.f, 100.f), Vec3f(0.f), Vec3f(1.f));
 				}
 				p_texture.setPixel(i, j, sumRGB / Vec3f(_nbPixelSamples));
 			}

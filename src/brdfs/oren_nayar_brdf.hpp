@@ -8,43 +8,54 @@ namespace RT_ISICG
 	class OrenNayarBRDF
 	{
 	  public:
-		OrenNayarBRDF( const Vec3f & p_kd, float p_slope ) : _kd( p_kd ), _slope(p_slope) {
+		OrenNayarBRDF( const Vec3f & p_kd, const float p_roughness ) : _kd( p_kd ), _roughness(p_roughness) {
 			/*
-				kd: coefficient de réflectance diffus
-				slope: Pente des microfacette
+				kd : coefficient de réflectance diffus
+				slope : Pente des microfacette
 			*/
-			float slopeSquared = _slope * _slope;
-			A = 1.f - 0.5f * slopeSquared / (slopeSquared + 0.33f);
-			B = 0.45f * slopeSquared / (slopeSquared + 0.09f);
+			const float slopeSquared = p_roughness * p_roughness;
+			_ambiant = _kd * INV_PIf;
+			_A = 1.f - 0.5f * slopeSquared / (slopeSquared + 0.33f);
+			_B = 0.45f * slopeSquared / (slopeSquared + 0.09f);
 		}  
-
-		// * INV_PIf : could be done in the constructor...
+		 
 		inline Vec3f evaluate(const Vec3f & p_normal, const Vec3f & p_obs, const Vec3f & p_inc) const { 
 			
 			const float cosThetaObs = glm::dot(p_normal, p_obs);
 			const float cosThetaInc = glm::dot(p_normal, p_inc);
-
-            const float thetaObs = glm::acos( cosThetaObs );
-            const float thetaInc = glm::acos( cosThetaInc );
-			
-            const Vec3f phiObs = glm::normalize( p_obs - p_normal * cosThetaObs );
-            const Vec3f phiInc = glm::normalize( p_inc - p_normal * cosThetaInc );
-			const float gamma = std::max(0.f, glm::dot(phiObs, phiInc));
 			  
-			return (_kd * INV_PIf) 
-				* A + (B * gamma
-					* sin(std::max(thetaInc, thetaObs)) 
-					* tan(std::min(thetaInc, thetaObs))
-				); 
+			return evaluate(p_normal, p_obs, p_inc, cosThetaObs, cosThetaInc); 
 		} 
+
+		// Cas ou le cos théta est précalculé
+		inline Vec3f evaluate(const Vec3f & p_normal, const Vec3f & p_obs, const Vec3f & p_inc, const float p_cosThetaObs, const float p_cosThetaInc) const {
+            const float thetaObs = glm::acos( p_cosThetaObs );
+            const float thetaInc = glm::acos( p_cosThetaInc );
+
+			float maxi = thetaInc;	// alpha
+			float mini = thetaObs; // beta
+			if (thetaInc < thetaObs) {
+				maxi = thetaObs;
+				mini = thetaInc;
+			}
+			
+            const Vec3f woObs = glm::normalize( p_obs - p_normal * p_cosThetaObs );
+            const Vec3f wiPhi = glm::normalize( p_inc - p_normal * p_cosThetaInc );
+
+			const float gamma = std::max(0.f, glm::dot(woObs, wiPhi));
+			  
+			return _ambiant * (_A + (_B * gamma * sin(maxi) * tan(mini))); 
+		} 
+
 
 		inline const Vec3f & getKd() const { return _kd; }
 
 	  private:
 		Vec3f _kd = WHITE;
-		float _slope = 0.f;
-		float A = 0.f;
-		float B = 0.f;
+		Vec3f _ambiant = WHITE;
+		float _roughness = 0.f;
+		float _A = 0.f;
+		float _B = 0.f;
 
 	};
 } // namespace RT_ISICG

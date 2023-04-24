@@ -15,18 +15,19 @@ namespace RT_ISICG
 		Renderer();
 		~Renderer() { delete _integrator; }
 
-		void setIntegrator( const IntegratorType p_integratorType );
+		void setIntegrator( const IntegratorType p_integratorType ); 
 		void setBackgroundColor( const Vec3f & p_color );
 
 		inline void setNbPixelSamples( const int p_nbPixelSamples ) { _nbPixelSamples = p_nbPixelSamples; }
+		inline void setNbLightSamples( const int p_nbLightSamples ) { _nbLightSamples = p_nbLightSamples; } // A appeller avant setIntegrator
 
 		float renderImage( const Scene & p_scene, const BaseCamera * p_camera, Texture & p_texture ); 
 
 	  private:
 		BaseIntegrator * _integrator	 = nullptr;
 		int				 _nbPixelSamples = 1;
-		int				 _nLightSample = 1;
-		float getOffset();
+		int				 _nbLightSamples = 1;
+		inline float _getOffset() const;
 	};
 } // namespace RT_ISICG
 

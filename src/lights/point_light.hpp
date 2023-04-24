@@ -9,7 +9,9 @@ namespace RT_ISICG
 	{
 		public:
 
-			PointLight( const Vec3f p_position, const Vec3f & p_color, const float p_power ) : BaseLight(p_color, p_power), _position(p_position) {}
+			PointLight( const Vec3f p_position, const Vec3f & p_color, const float p_power ) : BaseLight(p_color, p_power), _position(p_position) {
+				_isSurface = false;
+			}
 			virtual LightSample sample( const Vec3f & p_point ) const override;
 		protected:
 

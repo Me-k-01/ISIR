@@ -161,6 +161,7 @@ xcopy /y /d  "$(ProjectDir)lib\zlib1.dll" "$(OutDir)"</Command>
     <ClCompile Include="src\geometry\triangle_mesh_geometry.cpp" />
     <ClCompile Include="src\integrators\direct_lighting_integrator.cpp" />
     <ClCompile Include="src\integrators\ray_cast_integrator.cpp" />
+    <ClCompile Include="src\integrators\whitted_integrator.cpp" />
     <ClCompile Include="src\lights\point_light.cpp" />
     <ClCompile Include="src\lights\quad_light.cpp" />
     <ClCompile Include="src\main.cpp" />
@@ -175,7 +176,10 @@ xcopy /y /d  "$(ProjectDir)lib\zlib1.dll" "$(OutDir)"</Command>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\aabb.hpp" />
+    <ClInclude Include="src\img_generator.hpp" />
+    <ClInclude Include="src\brdfs\cook_torrance_brdf.hpp" />
     <ClInclude Include="src\brdfs\oren_nayar_brdf.hpp" />
+    <ClInclude Include="src\brdfs\phong_brdf.hpp" />
     <ClInclude Include="src\bvh.hpp" />
     <ClInclude Include="src\brdfs\lambert_brdf.hpp" />
     <ClInclude Include="src\cameras\base_camera.hpp" />
@@ -188,6 +192,7 @@ xcopy /y /d  "$(ProjectDir)lib\zlib1.dll" "$(OutDir)"</Command>
     <ClInclude Include="src\integrators\base_integrator.hpp" />
     <ClInclude Include="src\integrators\direct_lighting_integrator.hpp" />
     <ClInclude Include="src\integrators\ray_cast_integrator.hpp" />
+    <ClInclude Include="src\integrators\whitted_integrator.hpp" />
     <ClInclude Include="src\lights\base_light.hpp" />
     <ClInclude Include="src\lights\light_sample.hpp" />
     <ClInclude Include="src\lights\point_light.hpp" />
@@ -198,6 +203,10 @@ xcopy /y /d  "$(ProjectDir)lib\zlib1.dll" "$(OutDir)"</Command>
     <ClInclude Include="src\materials\base_material.hpp" />
     <ClInclude Include="src\materials\lambert_material.hpp" />
     <ClInclude Include="src\materials\matte_material.hpp" />
+    <ClInclude Include="src\materials\microfacet_material.hpp" />
+    <ClInclude Include="src\materials\mirror_material.hpp" />
+    <ClInclude Include="src\materials\plastic_material.hpp" />
+    <ClInclude Include="src\materials\transparent_material.hpp" />
     <ClInclude Include="src\objects\base_object.hpp" />
     <ClInclude Include="src\objects\implicit_surface.hpp" />
     <ClInclude Include="src\objects\plane.hpp" />

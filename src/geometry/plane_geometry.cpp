@@ -5,7 +5,7 @@ namespace RT_ISICG
 	
 	bool PlaneGeometry::intersect( const Ray & p_ray, float & p_t ) const
 	{ 
-		float den = dot(_normal, p_ray.getDirection());
+		const float den = dot(_normal, p_ray.getDirection());
 	
 		if (den == 0.f) {
 			p_t = -1.f;

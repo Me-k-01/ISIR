@@ -9,6 +9,7 @@ namespace RT_ISICG
 	{
 		RAY_CAST = 0,
 		DIRECT_LIGHTING = 1,
+		WHITTED = 2,
 		COUNT // keep it last
 	};
 
@@ -19,7 +20,6 @@ namespace RT_ISICG
 		virtual ~BaseIntegrator() = default;
 
 		virtual const IntegratorType getType() const = 0;
-
 		// Return incoming luminance.
 		virtual Vec3f Li( const Scene & p_scene, const Ray & p_ray, const float p_tMin, const float p_tMax ) const = 0;
 

@@ -23,7 +23,7 @@ namespace RT_ISICG
 		{
   
 			// Direction observé: inverse de la caméra 
-			return _brdf.evaluate(p_hitRecord._normal, glm::normalize( - p_ray.getDirection()), p_lightSample._direction);
+			return _brdf.evaluate(p_hitRecord._normal, glm::normalize( - p_ray.getDirection()), glm::normalize(p_lightSample._direction));
 		}
 
 		inline const Vec3f & getFlatColor() const override { return _brdf.getKd(); }

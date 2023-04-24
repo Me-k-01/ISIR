@@ -22,9 +22,15 @@ namespace RT_ISICG
 		Scene();
 		~Scene();
 
-		// Hard coded initialization.
-		void init();
-		void init5(); // TP 5
+		// Hard coded initialization. 
+		void initScene1();
+		void initScene2();
+		void initScene3();
+		void initScene4();
+		void initScene4_2(); 
+		void initScene5(); 
+		void initScene5_4();
+		void initScene6();
 
 		// Initialization from file.
 		void init( const std::string & p_path ) { throw std::exception( "Not implemented !" ); }
