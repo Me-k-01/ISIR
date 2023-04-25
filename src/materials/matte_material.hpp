@@ -16,12 +16,10 @@ namespace RT_ISICG
 
 		virtual ~MatteMaterial() = default;
 
-
 		Vec3f shade( const Ray &		 p_ray,
 					 const HitRecord &	 p_hitRecord,
 					 const LightSample & p_lightSample ) const override
 		{
-  
 			// Direction observé: inverse de la caméra 
 			return _brdf.evaluate(p_hitRecord._normal, glm::normalize( - p_ray.getDirection()), glm::normalize(p_lightSample._direction));
 		}

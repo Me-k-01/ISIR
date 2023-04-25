@@ -10,6 +10,8 @@
 
 #include "lights/quad_light.hpp"
 #include "lights/point_light.hpp"
+#include "lights/sphere_light.hpp"
+
 #include "materials/lambert_material.hpp"
 #include "materials/matte_material.hpp"
 #include "materials/plastic_material.hpp" 
@@ -133,7 +135,6 @@ namespace RT_ISICG
 	}
 
 	void Scene::initScene4_2() { // TP4 - 3
-		
 		//_addLight( new QuadLight( Vec3f( 900.f, 600.f, -300.f ), Vec3f(-800.f, 0.f, 0.f), Vec3f(0.f, 0.f, 300.f), WHITE, 20.f));
 	}
 
@@ -210,8 +211,8 @@ namespace RT_ISICG
 		// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 		// Add lights .
 		// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-		_addLight( new PointLight( Vec3f ( 0.f , 5.f , 0.f ), WHITE, 100.f ));
-		//_addLight( new QuadLight( Vec3f ( 1.f , 5.f , -2.f ) , Vec3f( -2.f , 0.f , 0.f ) , Vec3f( 0.f , 1.f , 2.f ) , WHITE , 40.f ) );
+		//_addLight( new PointLight( Vec3f ( 0.f , 5.f , 0.f ), WHITE, 100.f ));
+		_addLight( new QuadLight( Vec3f ( 1.f , 5.f , -2.f ) , Vec3f( -2.f , 0.f , 0.f ) , Vec3f( 0.f , 1.f , 2.f ) , WHITE , 40.f ) );
 	}
 
 	void Scene::initScene7() {
@@ -281,8 +282,9 @@ namespace RT_ISICG
 		// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 		// Add lights .
 		// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-		_addLight( new PointLight( Vec3f ( 0.f , 5.f , 0.f ), WHITE, 100.f ));
+		//_addLight( new PointLight( Vec3f ( 0.f , 5.f , 0.f ), WHITE, 100.f ));
 		//_addLight( new QuadLight( Vec3f ( 1.f , 5.f , -2.f ) , Vec3f( -2.f , 0.f , 0.f ) , Vec3f( 0.f , 1.f , 2.f ) , WHITE , 40.f ) );
+		_addLight( new SphereLight( Vec3f ( 0.f , 5.f , 0.f ), 0.2f, WHITE, 100.f ));
 	}
 
 	void Scene::loadFileTriangleMesh( const std::string & p_name, const std::string & p_path )

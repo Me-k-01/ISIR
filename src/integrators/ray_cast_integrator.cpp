@@ -9,9 +9,8 @@ namespace RT_ISICG
 	{
 		HitRecord hitRecord;
 		if ( p_scene.intersect( p_ray, p_tMin, p_tMax, hitRecord ) )
-		{
-			/// TODO ! cos theta...
-			float cosTheta = dot(hitRecord._normal, -p_ray.getDirection());
+		{ 
+			const float cosTheta = dot(hitRecord._normal, -p_ray.getDirection());
 				
 			return hitRecord._object->getMaterial()->getFlatColor() * std::max(cosTheta, 0.f);
 		}

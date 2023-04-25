@@ -35,7 +35,7 @@ namespace RT_ISICG
 		return _intersectAnyRec(_root, p_ray, p_tMin, p_tMax);
 
 	}
-	 
+
 
 	void BVH::_buildRec( BVHNode *			p_node, // Parent
 						 unsigned int p_firstTriangleId, // Indice du premier triangle

@@ -164,6 +164,7 @@ xcopy /y /d  "$(ProjectDir)lib\zlib1.dll" "$(OutDir)"</Command>
     <ClCompile Include="src\integrators\whitted_integrator.cpp" />
     <ClCompile Include="src\lights\point_light.cpp" />
     <ClCompile Include="src\lights\quad_light.cpp" />
+    <ClCompile Include="src\lights\sphere_light.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\objects\implicit_surface.cpp" />
     <ClCompile Include="src\objects\plane.cpp" />
@@ -191,12 +192,14 @@ xcopy /y /d  "$(ProjectDir)lib\zlib1.dll" "$(OutDir)"</Command>
     <ClInclude Include="src\img_generator.hpp" />
     <ClInclude Include="src\integrators\base_integrator.hpp" />
     <ClInclude Include="src\integrators\direct_lighting_integrator.hpp" />
+    <ClInclude Include="src\integrators\path_tracing_integrator.hpp" />
     <ClInclude Include="src\integrators\ray_cast_integrator.hpp" />
     <ClInclude Include="src\integrators\whitted_integrator.hpp" />
     <ClInclude Include="src\lights\base_light.hpp" />
     <ClInclude Include="src\lights\light_sample.hpp" />
     <ClInclude Include="src\lights\point_light.hpp" />
     <ClInclude Include="src\lights\quad_light.hpp" />
+    <ClInclude Include="src\lights\sphere_light.hpp" />
     <ClInclude Include="src\materials\color_material.hpp" />
     <ClInclude Include="src\defines.hpp" />
     <ClInclude Include="src\io\stb_include.hpp" />
