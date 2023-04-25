@@ -31,6 +31,8 @@ namespace RT_ISICG
 		void initScene5(); 
 		void initScene5_4();
 		void initScene6();
+		void initScene7();
+		void initProject();
 
 		// Initialization from file.
 		void init( const std::string & p_path ) { throw std::exception( "Not implemented !" ); }

@@ -29,9 +29,13 @@ namespace RT_ISICG
 		// Evaluate normal by computing gradient at 'p_point'
 		virtual Vec3f _evaluateNormal( const Vec3f & p_point ) const
 		{
-			/// TODO
-			return Vec3f( 1.f );
+			// On approxime les dérivé partiel avec la relation de différence finie 
+			const float dx = _sdf(p_point + Vec3f(_minDistance, 0.f, 0.f));
+			const float dy = _sdf(p_point + Vec3f(0.f, _minDistance, 0.f));
+			const float dz = _sdf(p_point + Vec3f(0.f, 0.f, _minDistance));
+			return glm::normalize((Vec3f(dx, dy, dz) - _sdf(p_point)) / _minDistance);
 		}
+
 
 	  private:
 		const float _minDistance = 1e-4f;
