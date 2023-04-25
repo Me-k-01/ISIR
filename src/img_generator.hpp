@@ -108,7 +108,7 @@ namespace RT_ISICG
 
 				case TP6:
 					_scene.initScene6(); 
-					posCamera = Vec3f(0.f, 2.f, -6.f); dirCamera = Vec3f(0.f, 0.f, 1.f); 
+					posCamera = Vec3f(0.f, 2.f, -6.f); dirCamera = Vec3f(0.f, 2.f, 0.f); 
 					_camera = new PerspectiveCamera(posCamera, dirCamera, Vec3f(0.f, 1.f, 0.f), 60.f, screenRatio);
 					
 					// Create and setup the renderer.
@@ -131,7 +131,7 @@ namespace RT_ISICG
 
 				case Projet: default:
 					_scene.initProject(); 
-					posCamera = Vec3f(0.f, 2.f, -6.f); dirCamera = Vec3f(0.f, 0.f, 1.f); 
+					posCamera = Vec3f(0.f, 2.f, -6.f); dirCamera = Vec3f(0.f, 2.f, 0.f); 
 					_camera = new PerspectiveCamera(posCamera, dirCamera, Vec3f(0.f, 1.f, 0.f), 60.f, screenRatio);
 					
 					// Create and setup the renderer.
