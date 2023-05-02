@@ -11,7 +11,7 @@ namespace RT_ISICG
 		public: 
 			 
 			enum TP_num {
-				TP1, TP2, TP3, TP4, TP5, TP5_GoldenBunny, TP6, TP7, Projet
+				TP1, TP2, TP3, TP4, Conference, TP5, TP5_GoldenBunny, TP6, TP7, Projet
 			};
 
 			ImgGenerator(const int p_imgWidth, const int p_imgHeight) : _imgWidth(p_imgWidth), _imgHeight(p_imgHeight) {
@@ -130,8 +130,18 @@ namespace RT_ISICG
 					_renderer.setBackgroundColor( GREY );
 					break;
 
+				case Conference:
+					_scene.initSceneConference(); 
+					posCamera = Vec3f(250.f, 500.f, 330.f); dirCamera = Vec3f(0.f, 350.f, 100.f); 
+					_camera = new PerspectiveCamera(posCamera, dirCamera, Vec3f(0.f, 1.f, 0.f), 60.f, screenRatio);
+					// Create and setup the renderer.	
+					_renderer.setNbPixelSamples(10);
+					_renderer.setIntegrator( IntegratorType::DIRECT_LIGHTING );
+					_renderer.setBackgroundColor( GREY );
+
+
 				case Projet: default:
-					_scene.initProject(); 
+					_scene.initSceneProject(); 
 					posCamera = Vec3f(0.f, 2.f, -6.f); dirCamera = Vec3f(0.f, 2.f, 0.f); 
 					_camera = new PerspectiveCamera(posCamera, dirCamera, Vec3f(0.f, 1.f, 0.f), 60.f, screenRatio);
 					

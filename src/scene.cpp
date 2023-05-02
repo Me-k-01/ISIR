@@ -113,8 +113,7 @@ namespace RT_ISICG
         //loadFileTriangleMesh( "UVsphere", DATA_PATH + "uvsphere.obj" );
         loadFileTriangleMesh( "UVsphere", DATA_PATH + "Bunny.obj" );
         _attachMaterialToObject( "CyanColor", "UVsphere_defaultobject" );
-        //_attachMaterialToObject( "Gold", "UVsphere_defaultobject" );
-		//loadFileTriangleMesh( "UVsphere", DATA_PATH + "conference/conference.obj" ); 
+        //_attachMaterialToObject( "Gold", "UVsphere_defaultobject" ); 
 		
         // Pseudo Cornell box made with infinite planes .
         _addObject( new Plane( "PlaneGround", Vec3f( 0.f, -3.f, 0.f ), Vec3f( 0.f, 1.f, 0.f ) ) );
@@ -134,8 +133,12 @@ namespace RT_ISICG
         _addLight( new PointLight( Vec3f( 0.f, 3.f, -5.f ), WHITE, 100.f ) );
 	}
 
-	void Scene::initScene4_2() { // TP4 - 3
-		//_addLight( new QuadLight( Vec3f( 900.f, 600.f, -300.f ), Vec3f(-800.f, 0.f, 0.f), Vec3f(0.f, 0.f, 300.f), WHITE, 20.f));
+	void Scene::initSceneConference() {
+		
+		const std::string DATA_PATH = "./data/";
+		loadFileTriangleMesh( "Conf", DATA_PATH + "conference/conference.obj" ); 
+		
+		_addLight(new QuadLight(Vec3f(900.f, 600.f, -300.f), Vec3f(-800.f, 0.f, 0.f ), Vec3f(0.f, 1.f, 300.f), WHITE, 40.f));
 	}
 
 	void Scene::initScene5()
@@ -243,7 +246,7 @@ namespace RT_ISICG
         _addLight( new PointLight( Vec3f( 2.80403f, 2.81158f, -3.11593f ), Vec3f(0.6f, 0.6f, 1.f ), 20.f));
 	}
 	
-	void Scene::initProject() {
+	void Scene::initSceneProject() {
 		// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 		// Add materials .
 		// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
@@ -351,8 +354,8 @@ namespace RT_ISICG
 				aiString mtlName;
 				mtl->Get( AI_MATKEY_NAME, mtlName );
 
-				/*_addMaterial( new ColorMaterial( std::string( mtlName.C_Str() ), kd ) );
-				_attachMaterialToObject( mtlName.C_Str(), meshName );*/
+				_addMaterial( new ColorMaterial( std::string( mtlName.C_Str() ), kd ) );
+				_attachMaterialToObject( mtlName.C_Str(), meshName );
 			}
 
 			std::cout << "-- [DONE] " << triMesh->getNbTriangles() << " triangles, " << triMesh->getNbVertices()
