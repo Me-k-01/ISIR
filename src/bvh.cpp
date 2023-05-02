@@ -48,8 +48,7 @@ namespace RT_ISICG
 			const TriangleMeshGeometry &tri = (*_triangles)[ i ];
 			p_node->_aabb.extend( tri.getVertex( 0 ) );
 			p_node->_aabb.extend( tri.getVertex( 1 ) );
-			p_node->_aabb.extend( tri.getVertex( 2 ) );
-			
+			p_node->_aabb.extend( tri.getVertex( 2 ) ); 
 		}
 		p_node->_firstTriangleId = p_firstTriangleId;
 		p_node->_lastTriangleId = p_lastTriangleId;
@@ -58,9 +57,9 @@ namespace RT_ISICG
 		
 		// ----- Critère d'arrêt -----
 		// Soit on a atteint la profondeur maximal, soit il n'y a p^lus assez de triangle dans la boîte pour découpper
-		if (p_depth >= _maxDepth || p_lastTriangleId - p_firstTriangleId <= _maxTrianglesPerLeaf) { 
+		if (p_depth >= _maxDepth || p_lastTriangleId - p_firstTriangleId <= _maxTrianglesPerLeaf) 
 			return;
-		}
+		
 		
 		/*const Vec3f parentMin = p_node->_aabb.getMin();
 		const Vec3f parentMax = p_node->_aabb.getMax();
