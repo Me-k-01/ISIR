@@ -28,7 +28,7 @@ namespace RT_ISICG
 		const Vec3f & getVertex( const unsigned int idV ) const;
 		const Vec3f& getCenter() const;
 
-		MeshTriangle* getRefMesh();
+		MeshTriangle* getRefMesh(); 
 	  private:
 		MeshTriangle * _refMesh = nullptr;
 		union
