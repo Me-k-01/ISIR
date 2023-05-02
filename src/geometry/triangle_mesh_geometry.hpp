@@ -24,11 +24,11 @@ namespace RT_ISICG
 
 		Vec3f getNormalInterpolation(const float & p_u, const float & p_v) const;
 
-		inline const Vec3f & getFaceNormal() const { return _faceNormal; } 
-		void getVertex(Vec3f& p_v0, Vec3f& p_v1, Vec3f& p_v2) const;
+		inline const Vec3f & getFaceNormal() const { return _faceNormal; }  
+		const Vec3f & getVertex( const unsigned int idV ) const;
 		const Vec3f& getCenter() const;
 
-		MeshTriangle* getRefMesh();
+		MeshTriangle* getRefMesh(); 
 	  private:
 		MeshTriangle * _refMesh = nullptr;
 		union

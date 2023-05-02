@@ -77,7 +77,7 @@ namespace RT_ISICG
 					float x = (float(i) + _getOffset()) / (float)width; // On ajoute 0.5 pour tirer au milieu du pixel, et on retire 0.5 pour le random float
 					float y = (float(j) + _getOffset()) / (float)height; 
 					Ray ray = p_camera->generateRay(x, y);
-					sumRGB += glm::clamp(_integrator->Li(p_scene, ray, 0.f, 100.f), Vec3f(0.f), Vec3f(1.f));
+					sumRGB += glm::clamp(_integrator->Li(p_scene, ray, 0.f, 10000.f), Vec3f(0.f), Vec3f(1.f));
 				}
 				p_texture.setPixel(i, j, sumRGB / Vec3f(_nbPixelSamples));
 			}

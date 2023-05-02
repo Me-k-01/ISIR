@@ -135,10 +135,11 @@ namespace RT_ISICG
 					posCamera = Vec3f(250.f, 500.f, 330.f); dirCamera = Vec3f(0.f, 350.f, 100.f); 
 					_camera = new PerspectiveCamera(posCamera, dirCamera, Vec3f(0.f, 1.f, 0.f), 60.f, screenRatio);
 					// Create and setup the renderer.	
-					_renderer.setNbPixelSamples(10);
-					_renderer.setIntegrator( IntegratorType::DIRECT_LIGHTING );
+					_renderer.setNbPixelSamples( 1 );
+					_renderer.setNbLightSamples( 1 );
+					_renderer.setIntegrator( IntegratorType::RAY_CAST );
 					_renderer.setBackgroundColor( GREY );
-
+					break;
 
 				case Projet: default:
 					_scene.initSceneProject(); 

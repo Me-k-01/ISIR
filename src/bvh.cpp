@@ -35,7 +35,7 @@ namespace RT_ISICG
 		return _intersectAnyRec(_root, p_ray, p_tMin, p_tMax);
 
 	}
-
+	#define TEST
 
 	void BVH::_buildRec( BVHNode *			p_node, // Parent
 						 unsigned int p_firstTriangleId, // Indice du premier triangle
@@ -45,14 +45,10 @@ namespace RT_ISICG
 		 
 		// ----- Calcul du AABB pour ce noeud -----
 		for (unsigned int i = p_firstTriangleId; i < p_lastTriangleId; i++) {
-			TriangleMeshGeometry tri = _triangles->at(i);
-
-			Vec3f v0, v1, v2;
-			tri.getVertex(v0, v1, v2);
-			//std::cout << v0[1]  << "," << v0[1] << ","  << v0[2];
-			p_node->_aabb.extend(v0);
-			p_node->_aabb.extend(v1);
-			p_node->_aabb.extend(v2);
+			const TriangleMeshGeometry &tri = (*_triangles)[ i ];
+			p_node->_aabb.extend( tri.getVertex( 0 ) );
+			p_node->_aabb.extend( tri.getVertex( 1 ) );
+			p_node->_aabb.extend( tri.getVertex( 2 ) ); 
 		}
 		p_node->_firstTriangleId = p_firstTriangleId;
 		p_node->_lastTriangleId = p_lastTriangleId;
@@ -61,31 +57,38 @@ namespace RT_ISICG
 		
 		// ----- Critère d'arrêt -----
 		// Soit on a atteint la profondeur maximal, soit il n'y a p^lus assez de triangle dans la boîte pour découpper
-		if (p_depth >= _maxDepth || p_lastTriangleId - p_firstTriangleId <= _maxTrianglesPerLeaf) { 
+		if (p_depth >= _maxDepth || p_lastTriangleId - p_firstTriangleId <= _maxTrianglesPerLeaf) 
 			return;
-		}
 		
-		const Vec3f parentMin = p_node->_aabb.getMin();
+		
+		/*const Vec3f parentMin = p_node->_aabb.getMin();
 		const Vec3f parentMax = p_node->_aabb.getMax();
-		Vec3f length = parentMax - parentMin;  
+		Vec3f length = parentMax - parentMin;  */
 
 		// ----- On choisit l'axe de la partition -----
-		Vec3f middle = Vec3f(parentMin);
+		Vec3f middle = p_node->_aabb.centroid();
+
 		std::function<bool(TriangleMeshGeometry)> splitFunction;
 		
-		if (length.x > length.y) {
-			// Axe x plus grand 
-			middle.x += length.x / 2.f;
-			splitFunction = [middle](TriangleMeshGeometry tri) -> bool {
-				return tri.getCenter().x < middle.x; // Séparation selon x
-			};
-		} else {
-			// Axe y plus grand
-			middle.y += length.y / 2.f;
-			splitFunction = [middle](TriangleMeshGeometry tri) -> bool {
-				return tri.getCenter().y < middle.y; // Séparation selon y
-			};
-		}
+		const unsigned int largestAxis = p_node->_aabb.largestAxis();
+		splitFunction = [ middle, largestAxis ]( TriangleMeshGeometry tri ) -> bool
+		{
+			return tri.getCenter()[ largestAxis ] < middle[ largestAxis ]; // Séparation selon x
+		};
+
+		//if (length.x > length.y) {
+		//	// Axe x plus grand 
+		//	middle.x += length.x / 2.f;
+		//	splitFunction = [middle](TriangleMeshGeometry tri) -> bool {
+		//		return tri.getCenter()[ largestAxis( ] < middle.x; // Séparation selon x
+		//	};
+		//} else {
+		//	// Axe y plus grand
+		//	middle.y += length.y / 2.f;
+		//	splitFunction = [middle](TriangleMeshGeometry tri) -> bool {
+		//		return tri.getCenter().y < middle.y; // Séparation selon y
+		//	};
+		//}
 		 
 		// On effectue la partition (séparation du tableau de firstTriId à lastTriId selon un des deux axes)
 		std::vector<TriangleMeshGeometry>::iterator iteratorMiddle = std::partition(
@@ -98,13 +101,13 @@ namespace RT_ISICG
 		const unsigned int idPartition = std::distance(_triangles->begin(), iteratorMiddle); 
  
 		// ----- Création des noeuds enfants -----
-		p_node->_left = new BVHNode();
-		p_node->_left->_aabb.setMin(parentMin);
-		p_node->_left->_aabb.setMax(middle);
+		p_node->_left = new BVHNode(); 
+		//p_node->_left->_aabb.setMin(parentMin);
+		// p_node->_left->_aabb.setMax(middle);
 
 		p_node->_right = new BVHNode();
-		p_node->_right->_aabb.setMin(middle);
-		p_node->_right->_aabb.setMax(parentMax);
+		//p_node->_right->_aabb.setMin(middle);
+		//p_node->_right->_aabb.setMax(parentMax);
 
 		// On continue la construction avec les enfants nouvellement créés
 		_buildRec(p_node->_left, p_firstTriangleId, idPartition, p_depth + 1);
@@ -128,6 +131,7 @@ namespace RT_ISICG
 		// On test l'intesection avec les triangles contenus dans la boîte englobante
 		if (p_node->isLeaf()) { 
 			for (size_t i = p_node->_firstTriangleId; i < p_node->_lastTriangleId; i++) { 
+				 //std::cout << p_node->_lastTriangleId - p_node->_firstTriangleId << std::endl; 
 				float t, u, v;
 				if (_triangles->at(i).intersect(p_ray, t, u, v)) { // On a une intersection avec un des triangles 
 					if (p_tMin <= t && t <= p_tMax) { // On verifie qu'on soit dans le frustum 

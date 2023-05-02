@@ -56,12 +56,12 @@ namespace RT_ISICG
             p_t = -1.f;
             return false;
         }
-	} 
-    void TriangleMeshGeometry::getVertex(Vec3f & p_v0, Vec3f & p_v1, Vec3f & p_v2) const {
-		p_v0 = _refMesh->_vertices[ _v0 ];
-		p_v1 = _refMesh->_vertices[ _v1 ];
-		p_v2 = _refMesh->_vertices[ _v2 ];
-	}
+	}  
+
+    const Vec3f & TriangleMeshGeometry::getVertex( const unsigned int idV ) const { 
+        return _refMesh->_vertices[ _v[idV] ]; 
+    }
+
     const Vec3f & TriangleMeshGeometry::getCenter() const {
 		return (_refMesh->_vertices[ _v0 ] + _refMesh->_vertices[ _v1 ] + _refMesh->_vertices[ _v2 ]) / 3.f; 
 	}
