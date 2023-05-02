@@ -26,6 +26,7 @@ namespace RT_ISICG
 
 		inline const Vec3f & getFaceNormal() const { return _faceNormal; } 
 		void getVertex(Vec3f& p_v0, Vec3f& p_v1, Vec3f& p_v2) const;
+		const Vec3f & getVertex( const unsigned int idV ) const;
 		const Vec3f& getCenter() const;
 
 		MeshTriangle* getRefMesh();

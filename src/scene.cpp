@@ -136,9 +136,10 @@ namespace RT_ISICG
 	void Scene::initSceneConference() {
 		
 		const std::string DATA_PATH = "./data/";
-		loadFileTriangleMesh( "Conf", DATA_PATH + "conference/conference.obj" ); 
+		loadFileTriangleMesh( "Conf", DATA_PATH + "conference/conference.obj" );
+		_addLight( new PointLight( Vec3f( 900, 600, -300 ), WHITE, 100.f ) );
 		
-		_addLight(new QuadLight(Vec3f(900.f, 600.f, -300.f), Vec3f(-800.f, 0.f, 0.f ), Vec3f(0.f, 1.f, 300.f), WHITE, 40.f));
+		//_addLight(new QuadLight(Vec3f(900.f, 600.f, -300.f), Vec3f(-800.f, 0.f, 0.f ), Vec3f(0.f, 1.f, 300.f), WHITE, 40.f));
 	}
 
 	void Scene::initScene5()
