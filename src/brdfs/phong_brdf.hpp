@@ -10,7 +10,7 @@ namespace RT_ISICG
 	class PhongBRDF
 	{
 	  public:
-		PhongBRDF( const Vec3f & p_kd, const float p_ks, const float p_s) : _kd(p_kd), _coefSpec(p_ks), _shininess(p_s)  {
+		PhongBRDF( const Vec3f & p_kd, const Vec3f & p_ks, const float p_s) : _kd(p_kd), _ks(p_ks), _shininess(p_s)  {
 			/*
 				kd : coefficient de réflectance diffus 
 				ks : coefficient de réflectance spéculaire
@@ -35,14 +35,14 @@ namespace RT_ISICG
 			#endif // USE_BLIN_PHONG
 			  
 
-			return _ambiant + (_coefSpec / std::max(0.f, cosThetaInc)) * pow(std::max(0.f, cosAlpha), _shininess);
+			return _ambiant + (_ks / std::max(0.f, cosThetaInc)) * pow(std::max(0.f, cosAlpha), _shininess);
 		} 
 
 		inline const Vec3f & getKd() const { return _kd; }
 
 	  private:
 		Vec3f _ambiant = WHITE;
-		Vec3f _coefSpec;
+		Vec3f _ks;
 		Vec3f _kd;
 		float _shininess;
 

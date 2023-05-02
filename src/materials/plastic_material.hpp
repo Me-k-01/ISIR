@@ -9,7 +9,7 @@ namespace RT_ISICG
 	class PlasticMaterial : public BaseMaterial
 	{
 	  public:
-		PlasticMaterial( const std::string & p_name, const Vec3f & p_diffuse, const float p_ks, const float p_s )
+		PlasticMaterial( const std::string & p_name, const Vec3f & p_diffuse, const Vec3f & p_ks, const float p_s )
 			: BaseMaterial( p_name ), _brdf( p_diffuse, p_ks, p_s )
 		{
 		}
