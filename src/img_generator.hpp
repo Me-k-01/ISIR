@@ -11,7 +11,7 @@ namespace RT_ISICG
 		public: 
 			 
 			enum TP_num {
-				TP1, TP2, TP3, TP4, Conference, TP5, TP5_GoldenBunny, TP6, TP7, Projet
+				TP1, TP2, TP3, TP4, Conference, TP5, TP5_2, TP5_GoldenBunny, TP6, TP7, Projet
 			};
 
 			ImgGenerator(const int p_imgWidth, const int p_imgHeight) : _imgWidth(p_imgWidth), _imgHeight(p_imgHeight) {
@@ -84,8 +84,21 @@ namespace RT_ISICG
 
 				case TP5:
 					_scene.initScene5();
-					//posCamera = Vec3f(0.f, 0.f, 0.f); dirCamera = Vec3f(0.f, 0.f, 1.f); 
-					posCamera = Vec3f(0.f, 0.f, 4.f); dirCamera = Vec3f(0.f, -4.f, 10.f); 
+					
+					///// Camera
+					posCamera = Vec3f(0.f); // Origine
+					dirCamera = Vec3f(0.f, 0.f, 1.f); // Axe z
+					_camera = new PerspectiveCamera(posCamera, dirCamera, Vec3f(0.f, 1.f, 0.f), 60.f, screenRatio);
+					
+					///// Create and setup the renderer.
+					_renderer.setIntegrator( IntegratorType::DIRECT_LIGHTING );
+					_renderer.setBackgroundColor( GREY );
+					break;
+
+				case TP5_2: // Blin-Phong
+					_scene.initScene5_2();
+					posCamera = Vec3f(0.f, 0.f, 0.f); dirCamera = Vec3f(0.f, 0.f, 1.f); 
+					//posCamera = Vec3f(0.f, 0.f, 4.f); dirCamera = Vec3f(0.f, -4.f, 10.f); 
 
 					_camera = new PerspectiveCamera(posCamera, dirCamera, Vec3f(0.f, 1.f, 0.f), 60.f, screenRatio);
 					

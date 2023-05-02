@@ -142,7 +142,30 @@ namespace RT_ISICG
 		//_addLight(new QuadLight(Vec3f(900.f, 600.f, -300.f), Vec3f(-800.f, 0.f, 0.f ), Vec3f(0.f, 1.f, 300.f), WHITE, 40.f));
 	}
 
+	
 	void Scene::initScene5()
+	{
+		// Ajout des objets
+		_addObject( new Sphere( "Sphere", Vec3f( 0.f, 0.f, 3.f ), 1.f ) ); 
+        
+		//_addMaterial( new LambertMaterial("Grey", GREY));
+		//_addMaterial( new MatteMaterial("Grey", GREY, 0.4f));
+		
+
+		_addMaterial( new PlasticMaterial("Grey", GREY, WHITE, 8.f)); 
+		//_addMaterial( new PlasticMaterial("Grey", GREY, WHITE, 64.f));  
+		
+		_attachMaterialToObject( "Grey", "Sphere" ); 
+		
+		_addMaterial( new LambertMaterial("Red", RED));  
+        _addObject( new Plane( "PlaneGround", Vec3f( 0.f, -2.f, 0.f ), Vec3f( 0.f, 1.f, 0.f ) ) ); // Orienté en y
+		//addMaterial( new PlasticMaterial("Red", RED, RED, 64.f));  // TP5 - 5 : Correction phong
+        _attachMaterialToObject( "Red", "PlaneGround" );
+
+        _addLight( new PointLight( Vec3f( 0.f, 0.f, -2.f ), WHITE, 60.f ) );
+	}
+
+	void Scene::initScene5_2() // Correction de Phong avec le model de Blinn-Phong
 	{ 
 		// Ajout des objets
 		//_addObject( new Sphere( "Obj", Vec3f( 0.f, 0.f, 3.f ), 1.f ) ); 
@@ -153,17 +176,16 @@ namespace RT_ISICG
 		//_addMaterial( new MicrofacetMaterial("Gold", Vec3f(1.f, 0.85f, 0.57f), 0.5f , 0.3f));
 		//_attachMaterialToObject( "Gold", "Obj" ); 
 		
-        _addObject( new Plane( "PlaneGround", Vec3f( 0.f, -3.f, 0.f ), Vec3f( 0.f, 1.f, 0.f ) ) ); 
+        _addObject( new Plane( "PlaneGround", Vec3f( 0.f, -0.1f, 0.f ), Vec3f( 0.f, 1.f, 0.f ) ) ); 
 		//_addMaterial( new LambertMaterial("Red", RED));  
-		_addMaterial( new PlasticMaterial("Red", RED, 0.3f, 64.f));  // TP5 - 5 : Correction phong
+		_addMaterial( new PlasticMaterial("Red", BLACK, RED, 64.f));  // TP5 - 5 : Correction phong
         _attachMaterialToObject( "Red", "PlaneGround" );
 
-        // Ajout des lumières
-        //_addLight( new PointLight( Vec3f( 0.f, 0.f, -2.f ), WHITE, 60.f ) );
-        _addLight( new PointLight( Vec3f( 0.f, 0.1f, 12.f ), WHITE, 60.f ) );   // TP5 - 5 : Correction phong
+        // Ajout des lumières 
+        _addLight( new PointLight( Vec3f( 0.f, 1.5f, 5.f ), WHITE, 60.f ) );   // TP5 - 5 : Correction phong
 	}
 
-	void Scene::initScene5_4() {
+	void Scene::initScene5_4() { // Golden bunny !
 		
 		const std::string DATA_PATH = "./data/";
 		// Ajout des objets

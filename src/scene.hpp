@@ -28,6 +28,7 @@ namespace RT_ISICG
 		void initScene3();
 		void initScene4(); 
 		void initScene5(); 
+		void initScene5_2(); 
 		void initScene5_4();
 		void initScene6();
 		void initScene7();
