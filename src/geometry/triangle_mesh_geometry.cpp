@@ -59,7 +59,7 @@ namespace RT_ISICG
 	}  
 
     const Vec3f & TriangleMeshGeometry::getVertex( const unsigned int idV ) const { 
-        return _refMesh->_vertices[ _v[idV] ];
+        return _refMesh->_vertices[ _v[idV] ]; 
     }
 
     const Vec3f & TriangleMeshGeometry::getCenter() const {
