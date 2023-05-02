@@ -191,6 +191,7 @@ namespace RT_ISICG
 		// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 		// Add objects .
 		// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+		
 		// Spheres .
 		_addObject( new Sphere( "Sphere1" , Vec3f( -2.f , 0.f , 3.f ) , 1.5f ));
 		_attachMaterialToObject( "Mirror" , "Sphere1" );
@@ -216,17 +217,13 @@ namespace RT_ISICG
 	}
 
 	void Scene::initScene7() {
-		 
-
         //_addObject( new Plane( "PlaneGround", Vec3f( 0.f, -3.f, 0.f ), Vec3f( 0.f, 1.f, 0.f ) ) ); 
-		_addMaterial( new MatteMaterial ( "WhiteMatte", WHITE, 0.6f ));
-		_addMaterial( new MatteMaterial ( "RedMatte", RED, 0.6f ));
-		_addMaterial( new MatteMaterial ( "GreenMatte", GREEN, 0.6f ));
-		_addMaterial( new MatteMaterial ( "BlueMatte", BLUE, 0.6f ));
-		_addMaterial( new MatteMaterial ( "GreyMatte", GREY, 0.6f ));
-		_addMaterial( new MatteMaterial ( "MagentaMatte", MAGENTA, 0.6f )); 
-
-		 
+		_addMaterial( new MatteMaterial( "WhiteMatte", WHITE, 0.6f ));
+		_addMaterial( new MatteMaterial( "RedMatte", RED, 0.6f ));
+		_addMaterial( new MatteMaterial( "GreenMatte", GREEN, 0.6f ));
+		_addMaterial( new MatteMaterial( "BlueMatte", BLUE, 0.6f ));
+		_addMaterial( new MatteMaterial( "GreyMatte", GREY, 0.6f ));
+		_addMaterial( new MatteMaterial( "MagentaMatte", MAGENTA, 0.6f ));
 		
         _addObject( new Plane( "PlaneGround", Vec3f( 0.f, 0.f, 0.f ), Vec3f( 0.f, 1.f, 0.f ) ) ); 
 		_addObject( new ImplicitSphere( "Sphere", Vec3f( 1.82257f, 1.f, 0.f ), 1.f ) ); 
@@ -265,8 +262,11 @@ namespace RT_ISICG
 		// Spheres .
 		_addObject( new Sphere( "Sphere1" , Vec3f( -2.f , 0.f , 3.f ) , 1.5f ));
 		_attachMaterialToObject( "Mirror" , "Sphere1" );
-		_addObject ( new Sphere ( "Sphere2" , Vec3f( 2.f , 0.f , 3.f ) , 1.5f ));
-		_attachMaterialToObject("Transparent" , "Sphere2" );
+
+		_addObject ( new Sphere ( "SphereLight" , Vec3f( 2.f , 0.f , 3.f ) , 0.5f ));
+		_attachMaterialToObject("WhiteMatte" , "SphereLight" );
+		_addLight( new SphereLight( Vec3f( 2.f , 0.f , 3.f ) , 0.6f, WHITE, 10.f ));
+
 		// Pseudo Cornell box made with infinite planes .
 		_addObject ( new Plane( "PlaneGround" , Vec3f( 0.f , -3.f , 0.f ), Vec3f( 0.f , 1.f , 0.f )));
 		_attachMaterialToObject( "GreyMatte" , "PlaneGround" );
@@ -284,7 +284,7 @@ namespace RT_ISICG
 		// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 		//_addLight( new PointLight( Vec3f ( 0.f , 5.f , 0.f ), WHITE, 100.f ));
 		//_addLight( new QuadLight( Vec3f ( 1.f , 5.f , -2.f ) , Vec3f( -2.f , 0.f , 0.f ) , Vec3f( 0.f , 1.f , 2.f ) , WHITE , 40.f ) );
-		_addLight( new SphereLight( Vec3f ( 0.f , 5.f , 0.f ), 0.2f, WHITE, 100.f ));
+		//_addLight( new SphereLight( Vec3f ( 0.f , 5.f , 0.f ), 0.2f, WHITE, 100.f ));
 	}
 
 	void Scene::loadFileTriangleMesh( const std::string & p_name, const std::string & p_path )

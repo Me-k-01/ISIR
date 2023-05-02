@@ -2,6 +2,7 @@
 #include "integrators/ray_cast_integrator.hpp"
 #include "integrators/direct_lighting_integrator.hpp"
 #include "integrators/whitted_integrator.hpp"
+#include "integrators/path_tracing_integrator.hpp"
 #include "utils/console_progress_bar.hpp"
 #include "utils/random.hpp"
 
@@ -25,8 +26,13 @@ namespace RT_ISICG
 				_integrator = new WhittedIntegrator(_nbLightSamples);
 				break;
 			}
+			case IntegratorType::PATH_TRACED: 
+			{
+				_integrator = new PathTracingIntegrator(_nbLightSamples);
+				break;
+			}
 			case IntegratorType::RAY_CAST:
-			default:
+			//default:
 			{
 				_integrator = new RayCastIntegrator();
 				break;

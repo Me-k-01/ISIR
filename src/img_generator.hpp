@@ -137,7 +137,7 @@ namespace RT_ISICG
 					
 					// Create and setup the renderer.
 					_renderer.setNbPixelSamples(10);
-					_renderer.setNbLightSamples(40);
+					_renderer.setNbLightSamples(10);
 					_renderer.setIntegrator( IntegratorType::WHITTED ); 
 					_renderer.setBackgroundColor( BLACK );
 					break;  

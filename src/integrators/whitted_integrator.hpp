@@ -16,7 +16,10 @@ namespace RT_ISICG
 			// Return incoming luminance.
 			Vec3f Li( const Scene & p_scene, const Ray & p_ray, const float p_tMin, const float p_tMax) const override;
 
-		private :
+
+		protected :
+			Vec3f _reflectTrace(const Scene& p_scene, const Ray& p_ray, const HitRecord& p_hitRecord, const float p_tMin, const float p_tMax, const int p_iBounces, const bool p_isInAir) const;
+			Vec3f _refractTrace(const Scene& p_scene, const Ray& p_ray, const HitRecord& p_hitRecord, const float p_tMin, const float p_tMax, const int p_iBounces, const bool p_isInAir) const;
 			Vec3f _trace( const Scene & p_scene, const Ray & p_ray, const float p_tMin, const float p_tMax, const int p_iBounces, const bool p_inAir) const;
 			int _nbBounces = 5; // nombres de rebonds maximaux 
 	};
