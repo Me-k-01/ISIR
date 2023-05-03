@@ -23,12 +23,12 @@ namespace RT_ISICG
 			}
 			case IntegratorType::WHITTED: 
 			{
-				_integrator = new WhittedIntegrator(_nbLightSamples);
+				_integrator = new WhittedIntegrator(_nbLightSamples, _nbLightBounces);
 				break;
 			}
 			case IntegratorType::PATH_TRACED: 
 			{
-				_integrator = new PathTracingIntegrator(_nbLightSamples);
+				_integrator = new PathTracingIntegrator(_nbLightSamples, _nbIndirectLightSample, _nbLightBounces);
 				break;
 			}
 			case IntegratorType::RAY_CAST:

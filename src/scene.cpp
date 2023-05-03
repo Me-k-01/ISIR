@@ -137,9 +137,9 @@ namespace RT_ISICG
 		
 		const std::string DATA_PATH = "./data/";
 		loadFileTriangleMesh( "Conf", DATA_PATH + "conference/conference.obj" );
-		_addLight( new PointLight( Vec3f( 900, 600, -300 ), WHITE, 100.f ) );
+		//_addLight( new PointLight( Vec3f( 900, 600, -300 ), WHITE, 100.f ) );
 		
-		//_addLight(new QuadLight(Vec3f(900.f, 600.f, -300.f), Vec3f(-800.f, 0.f, 0.f ), Vec3f(0.f, 1.f, 300.f), WHITE, 40.f));
+		_addLight(new QuadLight(Vec3f(900.f, 600.f, -300.f), Vec3f(-800.f, 0.f, 0.f ), Vec3f(0.f, 1.f, 300.f), WHITE, 40.f));
 	}
 
 	
@@ -287,11 +287,12 @@ namespace RT_ISICG
 		// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 		// Spheres .
 		_addObject( new Sphere( "Sphere1" , Vec3f( -2.f , 0.f , 3.f ) , 1.5f ));
-		_attachMaterialToObject( "Mirror" , "Sphere1" );
+		_attachMaterialToObject( "GreyMatte" , "Sphere1" );
 
-		_addObject ( new Sphere ( "SphereLight" , Vec3f( 2.f , 0.f , 3.f ) , 0.5f ));
-		_attachMaterialToObject("WhiteMatte" , "SphereLight" );
-		_addLight( new SphereLight( Vec3f( 2.f , 0.f , 3.f ) , 0.6f, WHITE, 10.f ));
+		_addObject ( new Sphere ( "Sphere2" , Vec3f( 2.f , 0.f , 3.f ) , 0.5f ));
+		_attachMaterialToObject( "GreyMatte" , "Sphere2" );
+		//_attachMaterialToObject("WhiteMatte" , "SphereLight" );
+		//_addLight( new SphereLight( Vec3f( 2.f , 0.f , 3.f ) , 0.6f, WHITE, 10.f ));
 
 		// Pseudo Cornell box made with infinite planes .
 		_addObject ( new Plane( "PlaneGround" , Vec3f( 0.f , -3.f , 0.f ), Vec3f( 0.f , 1.f , 0.f )));
@@ -308,7 +309,7 @@ namespace RT_ISICG
 		// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 		// Add lights .
 		// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-		//_addLight( new PointLight( Vec3f ( 0.f , 5.f , 0.f ), WHITE, 100.f ));
+		_addLight( new PointLight( Vec3f ( 0.f , 5.f , 0.f ), WHITE, 100.f ));
 		//_addLight( new QuadLight( Vec3f ( 1.f , 5.f , -2.f ) , Vec3f( -2.f , 0.f , 0.f ) , Vec3f( 0.f , 1.f , 2.f ) , WHITE , 40.f ) );
 		//_addLight( new SphereLight( Vec3f ( 0.f , 5.f , 0.f ), 0.2f, WHITE, 100.f ));
 	}

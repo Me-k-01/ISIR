@@ -6,6 +6,7 @@
 #include "integrators/base_integrator.hpp" 
 #include "texture.hpp"
 #include "utils/chrono.hpp"
+#include <omp.h>
 
 namespace RT_ISICG
 {
@@ -25,8 +26,10 @@ namespace RT_ISICG
 
 	  private:
 		BaseIntegrator * _integrator	 = nullptr;
-		int				 _nbPixelSamples = 1;
-		int				 _nbLightSamples = 1;
+		int				 _nbPixelSamples = 1; // Antialiasing
+		int				 _nbLightSamples = 1; // Lumière surfacique
+		int				 _nbLightBounces = 1; // Rebond mirroir / indirect lighting 
+		int				 _nbIndirectLightSample = 20; //  Pour approximation de l'intégral de Monte Carlo
 		inline float _getOffset() const;
 	};
 } // namespace RT_ISICG

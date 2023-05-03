@@ -29,9 +29,9 @@ namespace RT_ISICG
 		const float theta = TWO_PIf * randomFloat(); 
 		const float phi = acos(2.f * randomFloat() - 1.f); 
 		return Vec3f(
-			cos(theta) * sin(phi), 
-			sin(theta) * sin(phi), 
-			cos(phi)
+			cos(theta) * sin(phi),  
+			cos(phi),
+			sin(theta) * sin(phi) 
 		) * _radius + _center;
 	}
 }

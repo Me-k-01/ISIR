@@ -29,7 +29,7 @@ namespace RT_ISICG
 										    const Ray & p_ray, 
 										    const HitRecord & p_hitRecord, 
 											const float p_tMin, 
-											const float p_tMax, 
+											const float p_tMax,
 											const int p_iBounces, 
 											const bool p_isInAir) const  
 	{ 
