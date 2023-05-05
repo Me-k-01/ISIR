@@ -286,14 +286,23 @@ namespace RT_ISICG
 		// Add objects .
 		// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 		// Spheres .
-		_addObject( new Sphere( "Sphere1" , Vec3f( -2.f , 0.f , 3.f ) , 1.5f ));
-		_attachMaterialToObject( "GreyMatte" , "Sphere1" );
-
-		_addObject ( new Sphere ( "Sphere2" , Vec3f( 2.f , 0.f , 3.f ) , 0.5f ));
-		_attachMaterialToObject( "GreyMatte" , "Sphere2" );
+		//_addObject( new Sphere( "Sphere1" , Vec3f( -2.f , 0.f , 3.f ) , 1.5f ));
+		//_attachMaterialToObject( "WhiteMatte" , "Sphere1" );
+		//_addObject ( new Sphere ( "Sphere2" , Vec3f( 2.f , 0.f , 3.f ) , 0.5f ));
+		//_attachMaterialToObject( "WhiteMatte" , "Sphere2" );
 		//_attachMaterialToObject("WhiteMatte" , "SphereLight" );
 		//_addLight( new SphereLight( Vec3f( 2.f , 0.f , 3.f ) , 0.6f, WHITE, 10.f ));
-
+		
+		_addObject( new Sphere( "Sphere1" , Vec3f( -2.f , 0.f , 3.f ) , 1.5f ));
+		_addObject ( new Sphere ( "Sphere2" , Vec3f( 2.f , 0.f , 3.f ) , 1.5f ));
+		_attachMaterialToObject("Transparent" , "Sphere1" );
+		_attachMaterialToObject("WhiteMatte" , "Sphere2" );
+		
+		/*
+		_addObject ( new Sphere ( "SphereLight" , Vec3f( 2.f , 0.f , 3.f ) , 0.5f )); 
+		_attachMaterialToObject( "Transparent" , "Sphere1" ); 
+		_addLight( new SphereLight( Vec3f( 2.f , 0.f , 3.f ) , 0.6f, WHITE, 10.f ));
+		*/
 		// Pseudo Cornell box made with infinite planes .
 		_addObject ( new Plane( "PlaneGround" , Vec3f( 0.f , -3.f , 0.f ), Vec3f( 0.f , 1.f , 0.f )));
 		_attachMaterialToObject( "GreyMatte" , "PlaneGround" );

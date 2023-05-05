@@ -160,8 +160,8 @@ namespace RT_ISICG
 					_camera = new PerspectiveCamera(posCamera, dirCamera, Vec3f(0.f, 1.f, 0.f), 60.f, screenRatio);
 					
 					// Create and setup the renderer.
-					_renderer.setNbPixelSamples(10);
-					_renderer.setNbLightSamples(1);
+					_renderer.setNbPixelSamples(8);
+					_renderer.setNbLightSamples(12);
 					_renderer.setIntegrator( IntegratorType::PATH_TRACED ); 
 					_renderer.setBackgroundColor( BLACK );
 					break;  

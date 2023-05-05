@@ -45,7 +45,7 @@ namespace RT_ISICG
 				);
 			}
 
-			Vec3f _sampleUniformHemisphere( const Vec3f & p_normal ) const {
+			Vec3f _sampleUniformHemisphereOld( const Vec3f & p_normal ) const {
 				// Point sur une sphere uniformement distribué
 				const float theta = TWO_PIf * randomFloat(); 
 				const float phi = acos(2.f * randomFloat() - 1.f); 
@@ -61,7 +61,7 @@ namespace RT_ISICG
 				return sample; 
 			} 
 
-			/*Vec3f _sampleUniformHemisphere(const Vec3f& p_normal) const {
+			Vec3f _sampleUniformHemisphere( const Vec3f & p_normal ) const {
 				// Point sur l'hemisphere
 				const float theta = TWO_PIf * randomFloat();  
 				const float phi = acos(randomFloat()); 
@@ -73,7 +73,7 @@ namespace RT_ISICG
 				));  
 				// Rotation de de l'échantillon de l'hémisphere par rapport à la normal de la surface.
 				return glm::normalize(_rotateSample(sample, p_normal));
-			} */
+			} 
 			
 			const float sign(const float x) const {
 				return (x > 0) - (x < 0);
