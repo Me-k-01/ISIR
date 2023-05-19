@@ -1,5 +1,7 @@
 #include "direct_lighting_integrator.hpp"
 
+#define CASTED_SHADOW
+
 namespace RT_ISICG
 {
 	Vec3f DirectLightingIntegrator::Li( const Scene & p_scene,
@@ -13,7 +15,6 @@ namespace RT_ISICG
 
 		// Ajouter la contribution des sources lumineuses de la scene 		
 		return _directLighting(p_scene, p_ray, hitRecord); 
-		
 	}
 
 	Vec3f DirectLightingIntegrator::_directLighting(const Scene & p_scene, const Ray & p_ray, const HitRecord & p_hitRecord) const {
@@ -31,11 +32,13 @@ namespace RT_ISICG
 					// Determiner si le point observé est éclairé ou non (pour les ombres portées)
 					Ray shadowRay = Ray(p_hitRecord._point, lightSample._direction);
 					shadowRay.offset(p_hitRecord._normal);
-
+					 
+#ifdef CASTED_SHADOW
 					// Ombrage
 					// On lance un rayon en direction de la lumière, et s'il est obstrué on skip à cause de l'ombrage
 					if (p_scene.intersectAny(shadowRay, 0.f, lightSample._distance))  
-						continue;					 
+						continue;	
+#endif // CASTED_SHADOW
 
 					const float cosTheta = glm::dot(p_hitRecord._normal, lightSample._direction); 
 					// Eclairage de lambert

@@ -3,7 +3,7 @@
 
 #include "defines.hpp"
 
-#define USE_BLIN_PHONG
+//#define USE_BLINN_PHONG
 
 namespace RT_ISICG
 {
@@ -23,16 +23,15 @@ namespace RT_ISICG
 		inline Vec3f evaluate(const Vec3f & p_normal, const Vec3f & p_obs, const Vec3f & p_inc) const { 
 			
 
-			const float cosThetaInc = glm::dot(p_normal, p_inc);
-			float cosAlpha;
-			#ifdef USE_BLIN_PHONG
+			const float cosThetaInc = glm::dot(p_normal, p_inc); 
+#ifdef USE_BLINN_PHONG
 				const Vec3f h = glm::normalize(p_obs + p_inc); // demi vecteur entre Lo et Li, norm(Lo - Li) 
-				cosAlpha = glm::dot(p_normal, h);
-			#else
+				const float cosAlpha = glm::dot(p_normal, h);
+#else
 				const Vec3f reflect = glm::reflect(-p_inc, p_normal);
-				// Alpha : angle entre la direction d'observation 
-				cosAlpha = glm::dot(p_obs, reflect); 
-			#endif // USE_BLIN_PHONG
+				// Alpha : angle entre la direction d'observation et la normal
+				const float cosAlpha = glm::dot(p_obs, reflect); 
+#endif // USE_BLIN_PHONG
 			  
 
 			return _ambiant + (_ks / std::max(0.f, cosThetaInc)) * pow(std::max(0.f, cosAlpha), _shininess);

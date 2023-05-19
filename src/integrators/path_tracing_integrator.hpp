@@ -24,12 +24,11 @@ namespace RT_ISICG
 			
 			Vec3f _indirectLighting( const Scene & p_scene, const Ray & p_ray, const HitRecord & hitRecord, const float p_tMin, const float p_tMax, const int p_iBounces, const bool p_inAir) const;
 		private : 
-
 			Vec3f _rotateSample(const Vec3f & p_sample, const Vec3f & p_normal) const {
 				// Création d'un systeme de coordonnée à partir de la normal (le vecteur up est la normal)
 				Vec3f perpendicular, perpendicular2; // Nt et Nb
 				// Cas ou les y sont plus grands que les x 
-				// https://www.scratchapixel.com/lessons/3d-basic-rendering/global-illumination-path-tracing/global-illumination-path-tracing-practical-implementation.html
+				
 				perpendicular = std::fabs(p_normal.x) > std::fabs(p_normal.y) ?
 					Vec3f(p_normal.z, 0, -p_normal.x) : 
 					Vec3f(0, -p_normal.z, p_normal.y) ;
@@ -94,7 +93,6 @@ namespace RT_ISICG
 				// On applique les 4 rotations 
 				// RxTheta * RzTheta * RyPhi * RxPhi * sample
 
-				 
 				const float theta = TWO_PIf * randomFloat() ;
 				const float phi = acos(sqrt(randomFloat())) ; 
 
@@ -107,7 +105,6 @@ namespace RT_ISICG
 			}
 
 			const int _nbIndirectSample = 3;
-
 	};
 
 } // namespace RT_ISICG

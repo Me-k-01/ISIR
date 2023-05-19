@@ -23,6 +23,7 @@
     <ProjectGuid>{2068894B-9BA4-4189-AFDF-2A2EFD34C765}</ProjectGuid>
     <RootNamespace>RTISICG</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName> </ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -167,6 +168,7 @@ xcopy /y /d  "$(ProjectDir)lib\zlib1.dll" "$(OutDir)"</Command>
     <ClCompile Include="src\lights\point_light.cpp" />
     <ClCompile Include="src\lights\quad_light.cpp" />
     <ClCompile Include="src\lights\sphere_light.cpp" />
+    <ClCompile Include="src\lights\torus_light.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\objects\implicit_surface.cpp" />
     <ClCompile Include="src\objects\plane.cpp" />
@@ -202,6 +204,7 @@ xcopy /y /d  "$(ProjectDir)lib\zlib1.dll" "$(OutDir)"</Command>
     <ClInclude Include="src\lights\point_light.hpp" />
     <ClInclude Include="src\lights\quad_light.hpp" />
     <ClInclude Include="src\lights\sphere_light.hpp" />
+    <ClInclude Include="src\lights\torus_light.hpp" />
     <ClInclude Include="src\materials\color_material.hpp" />
     <ClInclude Include="src\defines.hpp" />
     <ClInclude Include="src\io\stb_include.hpp" />

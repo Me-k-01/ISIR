@@ -22,9 +22,11 @@ namespace RT_ISICG
 		Vec3f sup = max(tMin, tMax);
 		float tNear = maxi(inf);
 		float tFar = mini(sup);
+
 		return tNear <= tFar;
 
 		/*
+		// Une autre methode serait de tester pour chaque axe
 		Vec3f inf, sup;
 		inf.x = (_min.x - o.x) / d.x;
 		sup.x = (_max.x - o.x) / d.x;

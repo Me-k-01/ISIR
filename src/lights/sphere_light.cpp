@@ -11,12 +11,11 @@ namespace RT_ISICG
 		const float dist = glm::length(neg_wi);
 		 
 		Vec3f normal = glm::normalize(_center - posSurf); // Du centre vers la position sur la surface
-		// On détermine la normal suivant le sens du rayon qui a frappé la surface 
-		//normal = glm::dot( dir, normal ) > 0.f ? normal : -normal;
-		
+		 
 		float cosThetaI = glm::dot(dir, normal);
+		// On détermine le cos Théta suivant le sens du rayon par rapport à la normal 		
 		if (cosThetaI < 0.f) { 
-			// On peut tapper la surface depuis l'interieur de la lumière (pour éclairer l'objet qui emet la lumière)
+			// Car on peut tapper la surface depuis l'interieur de la lumière (pour éclairer l'objet qui émet de la lumière par example)
 			cosThetaI = - cosThetaI;
 		}
 		const float pdf = dist * dist / (cosThetaI * _area);

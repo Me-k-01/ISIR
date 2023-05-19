@@ -62,7 +62,7 @@ namespace RT_ISICG
 		if (sinThetaI > 1.f) 
 			return reflection;
 			
-		const float cosThetaT = sqrt(1.f - pow(eta * sinThetaI, 2));//glm::dot(refract, - hitRecord._normal);
+		const float cosThetaT = sqrt(1.f - pow(eta * sinThetaI, 2));
 
 		// équation de Fresnel
 		const float rs = pow((n1 * cosThetaI - n2 * cosThetaT) / 

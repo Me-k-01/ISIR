@@ -32,9 +32,9 @@ namespace RT_ISICG
 					
 					// Camera positionnable :
 					posCamera = Vec3f(0.f, 0.f, -2.f); dirCamera = Vec3f(0.f, 0.f, 79.f);
-					//Vec3f posCamera = Vec3f(1, 0, 0); Vec3f dirCamera = Vec3f(1, 0, 1);
-					//Vec3f posCamera = Vec3f(0, 1, 0); Vec3f dirCamera = Vec3f(0, 1, 1);
-					//Vec3f posCamera = Vec3f(4, -1, 0); Vec3f dirCamera = Vec3f(-1, -1, 2);
+					//posCamera = Vec3f(1, 0, 0); dirCamera = Vec3f(1, 0, 1);
+					//posCamera = Vec3f(0, 1, 0); dirCamera = Vec3f(0, 1, 1);
+					//posCamera = Vec3f(4, -1, 0); dirCamera = Vec3f(-1, -1, 2);
 					_camera = new PerspectiveCamera(posCamera, dirCamera, Vec3f(0.f, 1.f, 0.f), 60.f, screenRatio);
 					
 					// Create and setup the renderer.	
@@ -148,9 +148,9 @@ namespace RT_ISICG
 					posCamera = Vec3f(-250.f, 500.f, 330.f); dirCamera = Vec3f(0.f, 350.f, 100.f); 
 					_camera = new PerspectiveCamera(posCamera, dirCamera, Vec3f(0.f, 1.f, 0.f), 60.f, screenRatio);
 					// Create and setup the renderer.	
-					_renderer.setNbPixelSamples( 1 );
-					_renderer.setNbLightSamples( 10 );
-					_renderer.setIntegrator( IntegratorType::WHITTED );
+					_renderer.setNbPixelSamples( 8 );
+					_renderer.setNbLightSamples( 12 );
+					_renderer.setIntegrator( IntegratorType::PATH_TRACED );
 					_renderer.setBackgroundColor( GREY );
 					break;
 
@@ -160,8 +160,8 @@ namespace RT_ISICG
 					_camera = new PerspectiveCamera(posCamera, dirCamera, Vec3f(0.f, 1.f, 0.f), 60.f, screenRatio);
 					
 					// Create and setup the renderer.
-					_renderer.setNbPixelSamples(8);
-					_renderer.setNbLightSamples(12);
+					_renderer.setNbPixelSamples(3); // 8
+					_renderer.setNbLightSamples(12); // 12
 					_renderer.setIntegrator( IntegratorType::PATH_TRACED ); 
 					_renderer.setBackgroundColor( BLACK );
 					break;  

@@ -2,6 +2,7 @@
 #define __RT_ISICG_IMPLICIT_TORUS_SURFACE__
 
 #include "implicit_surface.hpp"
+//#define VERTICAL
 
 namespace RT_ISICG
 {
@@ -16,7 +17,12 @@ namespace RT_ISICG
 		virtual float _sdf(const Vec3f& p_point) const override
 		{
 			Vec3f point = p_point - _center;  
-			Vec2f q = Vec2f(glm::length(Vec2f(point.x, point.y)) - _radius, point.z); // Donut vertical
+			// Donut vertical
+#ifdef VERTICAL
+			Vec2f q = Vec2f(glm::length(Vec2f(point.x, point.y)) - _radius, point.z);  
+#else
+			Vec2f q = Vec2f(glm::length(Vec2f(point.x, point.z)) - _radius, point.y);  
+#endif // VERTICAL
 			return length(q) - _thickness;
 		}
 	  private:
