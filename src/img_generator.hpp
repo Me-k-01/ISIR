@@ -156,12 +156,16 @@ namespace RT_ISICG
 
 				case Projet: default:
 					_scene.initSceneProject(); 
-					posCamera = Vec3f(0.f, 2.f, -6.f); dirCamera = Vec3f(0.f, 2.f, 0.f); 
+#ifdef TEST_TORUS
+					posCamera = Vec3f(0.f, 2.f, -6.f); dirCamera = Vec3f(0.f, 2.f, 0.f);  
+#else
+					posCamera = Vec3f(1360.66f, 399.557f, 107.297f); dirCamera = Vec3f(0.f, 179.651f, 125.194f); 
+#endif // TEST_TORUS
 					_camera = new PerspectiveCamera(posCamera, dirCamera, Vec3f(0.f, 1.f, 0.f), 60.f, screenRatio);
 					
 					// Create and setup the renderer.
-					_renderer.setNbPixelSamples(3); // 8
-					_renderer.setNbLightSamples(12); // 12
+					_renderer.setNbPixelSamples(8); // 8
+					_renderer.setNbLightSamples(3); // 12
 					_renderer.setIntegrator( IntegratorType::PATH_TRACED ); 
 					_renderer.setBackgroundColor( BLACK );
 					break;  

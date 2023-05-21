@@ -282,7 +282,7 @@ namespace RT_ISICG
 		_addMaterial( new MatteMaterial ( "MagentaMatte", MAGENTA, 0.6f )); 
 		_addMaterial( new MirrorMaterial( "Mirror" ));
 		_addMaterial( new TransparentMaterial( "Transparent" ));
-
+#ifdef TEST_TORUS
 		// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 		// Add objects .
 		// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
@@ -294,14 +294,14 @@ namespace RT_ISICG
 		//_attachMaterialToObject("WhiteMatte" , "SphereLight" );
 		//_addLight( new SphereLight( Vec3f( 2.f , 0.f , 3.f ) , 0.6f, WHITE, 10.f ));
 		
-		//_addObject( new Sphere( "Sphere1" , Vec3f( -2.f , 0.f , 3.f ) , 1.5f ));
-		//_attachMaterialToObject("Transparent" , "Sphere1" ); 
+		_addObject( new Sphere( "Sphere1" , Vec3f( -2.f , 0.f , 3.f ) , 1.5f ));
+		_attachMaterialToObject("Mirror" , "Sphere1" ); 
 
-		_addObject ( new ImplicitTorus( "Torus" , Vec3f( 2.f , 0.f , 3.f ) , 1.5f, 0.3f));
-		_attachMaterialToObject("WhiteMatte" , "Torus" ); 
+		//_addObject ( new ImplicitTorus( "Torus" , Vec3f( 2.f , 0.f , 3.f ) , 1.5f, 0.3f));
+		//_attachMaterialToObject("WhiteMatte" , "Torus" ); 
 		
-		//_addObject ( new Sphere ( "Sphere2" , Vec3f( 2.f , 0.f , 3.f ) , 0.3f ));
-		//_attachMaterialToObject("WhiteMatte" , "Sphere2" );
+		_addObject ( new Sphere ( "Sphere2" , Vec3f( 2.f , 0.f , 3.f ) , 0.5f ));
+		_attachMaterialToObject("Mirror" , "Sphere2" );
 		/*
 		_addObject ( new Sphere ( "SphereLight" , Vec3f( 2.f , 0.f , 3.f ) , 0.5f )); 
 		_attachMaterialToObject( "Transparent" , "Sphere1" ); 
@@ -323,9 +323,34 @@ namespace RT_ISICG
 		// Add lights .
 		// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 		//_addLight( new PointLight( Vec3f ( 0.f , 5.f , 0.f ), WHITE, 100.f ));
-		//_addLight( new SphereLight( Vec3f ( 0.f , 5.f , 0.f ), 0.2f, WHITE, 100.f ));
+		_addLight( new SphereLight( Vec3f ( 2.f , 0.f , 3.f ), 0.6f, WHITE, 10.f ));
 		//_addLight( new QuadLight( Vec3f ( 1.f , 5.f , -2.f ) , Vec3f( -2.f , 0.f , 0.f ) , Vec3f( 0.f , 1.f , 2.f ) , WHITE , 40.f ) ); 
-		_addLight( new TorusLight(Vec3f( 2.f , 0.f , 3.f ) , 1.5f, 0.4f, WHITE , 10.f ));
+		//_addLight( new TorusLight(Vec3f( 2.f , 0.f , 3.f ) , 1.5f, 0.4f, WHITE , 10.f ));
+	
+#else 
+		const std::string DATA_PATH = "./data/";
+		loadFileTriangleMesh( "Conf", DATA_PATH + "conference/conference.obj" );
+
+		//_addObject( new Sphere( "SphereLight1" , Vec3f( 589.f , 519.f, 97.f ) , 20.f ));
+		//_attachMaterialToObject("WhiteMatte" , "SphereLight1" ); 
+		//_addLight( new SphereLight( Vec3f( 589.f , 519.f, 97.f), 21.f, WHITE, 1000.f ));
+
+		
+		//_addObject( new Sphere( "SphereLight2" , Vec3f( 189.f , 519.f, 97.f), 20.f ));
+		//_attachMaterialToObject("WhiteMatte" , "SphereLight2" ); 
+		//_addLight( new SphereLight( Vec3f( 189.f , 519.f, 97.f), 21.f, WHITE, 1000.f ));
+		
+		// Exit-sign light
+		//_addLight( new QuadLight( Vec3f ( -284.29f , 536.801f , -561.784f ) , Vec3f( -71.2235f , 0.f , 0.f ), Vec3f( 0.f, 47.8f, 0.f)  , GREEN , 40.f ) );
+		//_addLight( new QuadLight( Vec3f ( -284.29f , 536.801f , -561.784f ) , Vec3f( 0.f, 47.8f, 0.f ) , Vec3f( -71.2235f , 0.f , 0.f) , GREEN , 40.f ) );
+		 
+		// Mirror
+		_addObject( new ImplicitBox( "MirrorBox", Vec3f( -338.9f, 337.576f, 270.275f ), Vec3f(41, 595, 345) ) ); 
+		_attachMaterialToObject( "Mirror" , "MirrorBox" );
+		
+		_attachMaterialToObject("Transparent", "Conf_mesh29");
+		_addLight(new QuadLight(Vec3f(900.f, 600.f, -300.f), Vec3f(-800.f, 0.f, 0.f ), Vec3f(0.f, 1.f, 300.f), WHITE, 40.f));
+#endif // TEST_TORUS 
 	}
 
 	void Scene::loadFileTriangleMesh( const std::string & p_name, const std::string & p_path )
@@ -395,6 +420,7 @@ namespace RT_ISICG
 				//_addMaterial( new ColorMaterial( std::string( mtlName.C_Str() ), kd ) );
 				_addMaterial( new PlasticMaterial( std::string( mtlName.C_Str() ), kd, ks, s ) );
 				_attachMaterialToObject( mtlName.C_Str(), meshName );
+				//std::cout << "------> attached to : " << meshName << "\n";
 			}
 
 			std::cout << "-- [DONE] " << triMesh->getNbTriangles() << " triangles, " << triMesh->getNbVertices()

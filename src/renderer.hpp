@@ -28,7 +28,7 @@ namespace RT_ISICG
 		BaseIntegrator * _integrator	 = nullptr;
 		int				 _nbPixelSamples = 1; // Antialiasing
 		int				 _nbLightSamples = 1; // Lumière surfacique
-		int				 _nbLightBounces = 1; // Rebond mirroir / indirect lighting 
+		int				 _nbLightBounces = 2; // Rebond mirroir / indirect lighting 
 		int				 _nbIndirectLightSample = 3; //  Pour approximation de l'intégral de Monte Carlo
 		inline float _getOffset() const;
 	};
