@@ -333,7 +333,7 @@ namespace RT_ISICG
 
 		//_addObject( new Sphere( "SphereLight1" , Vec3f( 589.f , 519.f, 97.f ) , 20.f ));
 		//_attachMaterialToObject("WhiteMatte" , "SphereLight1" ); 
-		//_addLight( new SphereLight( Vec3f( 589.f , 519.f, 97.f), 21.f, WHITE, 1000.f ));
+		//_addLight( new SphereLight( Vec3f( 589.f , 519.f, 97.f), 25.f, WHITE, 1000.f ));
 
 		
 		//_addObject( new Sphere( "SphereLight2" , Vec3f( 189.f , 519.f, 97.f), 20.f ));
@@ -345,9 +345,10 @@ namespace RT_ISICG
 		//_addLight( new QuadLight( Vec3f ( -284.29f , 536.801f , -561.784f ) , Vec3f( 0.f, 47.8f, 0.f ) , Vec3f( -71.2235f , 0.f , 0.f) , GREEN , 40.f ) );
 		 
 		// Mirror
-		_addObject( new ImplicitBox( "MirrorBox", Vec3f( -338.9f, 337.576f, 270.275f ), Vec3f(41, 595, 345) ) ); 
-		_attachMaterialToObject( "Mirror" , "MirrorBox" );
+		//_addObject( new ImplicitBox( "MirrorBox", Vec3f( -338.9f, 337.576f, 270.275f ), Vec3f(41, 595, 345) ) ); 
+		//_attachMaterialToObject( "Mirror" , "MirrorBox" );
 		
+		_attachMaterialToObject("Mirror", "Conf_mesh11");
 		_attachMaterialToObject("Transparent", "Conf_mesh29");
 		_addLight(new QuadLight(Vec3f(900.f, 600.f, -300.f), Vec3f(-800.f, 0.f, 0.f ), Vec3f(0.f, 1.f, 300.f), WHITE, 40.f));
 #endif // TEST_TORUS 
